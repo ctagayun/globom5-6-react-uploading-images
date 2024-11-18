@@ -24,7 +24,8 @@ const HouseForm = ({ house, submitted }: Args) => {
   //*attribute/value pairs to a JSX element in this case "houseState"
   const [houseState, setHouseState] = useState({ ...house });
 
-  //*React.MouseEventHandler<HTMLButtonElement> is the type of the onSubmit function
+  //*Note: React.MouseEventHandler<HTMLButtonElement>
+  //* is the type of the onSubmit function
   //*which gets an event information object again (e.g.  async (e))
   const onSubmit: React.MouseEventHandler<HTMLButtonElement> = async (e) => {
     e.preventDefault(); //*needed because the default browser behavior for 
@@ -36,18 +37,22 @@ const HouseForm = ({ house, submitted }: Args) => {
                             //*to date while the user filled out the input.
   };
 
-  const onFileSelected = async (
-    e: React.ChangeEvent<HTMLInputElement>
-  ): Promise<void> => {
-    e.preventDefault();
-    e.target.files &&
-      e.target.files[0] &&
-      setHouseState({
-        ...houseState,
-        photo: await toBase64(e.target.files[0]),
-      });
-  };
-
+  //*Event handler when upload image box is changed. It is an async function that returns a PROMISE
+  const onFileSelected = async (e: React.ChangeEvent<HTMLInputElement>)  //* the parameter React.ChangeEvent is the type for change event
+    : Promise<void> => {  //*The return type is an empty promise
+    e.preventDefault();   //*the first thing to be done is to preevent the default browser behavior  
+    e.target.files && e.target.files[0] //*second is to check if there are files on target the target 
+                                        //*is the HTML input box element in this case
+                                        //*and if there are files we want to make there is a first file
+                                        //*indicated by [0]
+    && setHouseState({        //*If the there is a first file we want to modify the houseState do that      
+        ...houseState,        //*the photo gets added.
+        photo: await toBase64(e.target.files[0]),  //*The photo property is just a string.
+      });                                          //*So convert the photo to string using toBase64
+  };                                               //*Javascript has a way to convert image to a 
+                                                   //*base64-encoded string and create a so-called data URL
+                                                   //*out of it that can be used in an image tag
+                                                   
   return (
     //*Note we have  a FORM tag
     <form className="mt-2">
@@ -110,18 +115,20 @@ const HouseForm = ({ house, submitted }: Args) => {
           }
         />
       </div>
-      {/* <div className="form-group mt-2">
+       {/* Html code for uploading image */}
+       <div className="form-group mt-2">
         <label htmlFor="image">Image</label>
         <input
           id="image"
           type="file"
           className="form-control"
-          onChange={onFileSelected}
+          onChange={onFileSelected} //*event handler when input box is changed. It is an async function
         />
       </div>
+       {/* End Html code for uploading image */}
       <div className="mt-2">
         <img src={houseState.photo}></img>
-      </div> */}
+      </div>  
       <button
         className="btn btn-primary mt-2"
         //* disabled={!houseState.address || !houseState.country}

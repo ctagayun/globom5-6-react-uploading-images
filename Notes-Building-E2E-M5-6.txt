@@ -356,7 +356,14 @@ Module 5: Creating, Updating and Deleting Data
           >
         to test do Add House enter Address (dont enter country) --> Click Submit
         ValidationSummary Component should display
-       
+
+  7. Uploading IMages 
+      - https://app.pluralsight.com/ilx/video-courses/clips/d32eed30-599e-4646-b3d5-9d92cb16b1c7
+
+      - to upload image in HouseForm.tsx add  HTML code right above the Submit button.
+       Add it in the area marked:  {/* Html code for uploading image */} 
+
+      - note that the eventHandler onFileSelected is using React.ChangeEvent<HTMLInputElement>
   Useful links:
      List of Validation attributes  can be found here: https://4sh.nl/annotations
     
