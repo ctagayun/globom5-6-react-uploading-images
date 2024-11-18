@@ -364,6 +364,11 @@ Module 5: Creating, Updating and Deleting Data
        Add it in the area marked:  {/* Html code for uploading image */} 
 
       - note that the eventHandler onFileSelected is using React.ChangeEvent<HTMLInputElement>
+
+      - to test: a house in the houselist --> Edit --> select image --> Submit to persist image
+        in the database.
+
+        
   Useful links:
      List of Validation attributes  can be found here: https://4sh.nl/annotations
     
