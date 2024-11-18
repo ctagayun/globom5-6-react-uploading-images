@@ -1,9 +1,10 @@
 import React, { useState } from "react";
 import { House } from "../types/house";
-import toBase64 from "../toBase64";
+import toBase64 from "../toBase64";  //*This the function we wrote to convert an image to a string
 
-//*This component needs 2 props: house instance and the 
-//*the function to be called
+//*This component needs 2 props: 
+//*1. house instance and the 
+//*2. the function to be called
 type Args = {
   house: House;
   submitted: (house: House) => void; //*as a param we will supply a filled-up house
@@ -48,10 +49,11 @@ const HouseForm = ({ house, submitted }: Args) => {
     && setHouseState({        //*If the there is a first file we want to modify the houseState do that      
         ...houseState,        //*the photo gets added.
         photo: await toBase64(e.target.files[0]),  //*The photo property is just a string.
-      });                                          //*So convert the photo to string using toBase64
+      });                                          //*So convert the photo to string using toBase64 
+                                                   //*we need to write ourselves.
   };                                               //*Javascript has a way to convert image to a 
                                                    //*base64-encoded string and create a so-called data URL
-                                                   //*out of it that can be used in an image tag
+                                                   //*out of it that can be used in an image tag.             
                                                    
   return (
     //*Note we have  a FORM tag
